@@ -1,0 +1,11 @@
+^\.gitignore$
+^\.travis\.yml$
+^\.git$
+^appveyor\.yml$
+.*~$
+.github
+^LICENSE\.md$
+^\.github/workflows$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
