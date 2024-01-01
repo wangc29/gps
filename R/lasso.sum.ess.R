@@ -1,4 +1,4 @@
-#' cor2cov
+#' cor2cov function
 #'
 #' @param b.vec genetic effect estimates
 #' @return a vector
@@ -136,4 +136,11 @@ gps_grid<-function(min_ratio=0.01,nlambda=30,l1_ratio=c(0,0.25,0.5,0.75,1),eta_v
   }
   return(list("beta_grid"=do.call(cbind,beta_grid),"param_grid"=param_grid))
 }
+
+
+
+
+
+
+
 

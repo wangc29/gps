@@ -2,7 +2,7 @@
 % Please edit documentation in R/lasso.sum.ess.R
 \name{cor2cov}
 \alias{cor2cov}
-\title{cor2cov}
+\title{cor2cov function}
 \usage{
 cor2cov(ld.cor.mat, v.vec)
 }
@@ -13,5 +13,5 @@ cor2cov(ld.cor.mat, v.vec)
 a vector
 }
 \description{
-cor2cov
+cor2cov function
 }
