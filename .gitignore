@@ -3,3 +3,4 @@
 */*/*.o
 */*/*.so
 .Rproj.user
+.DS_Store
