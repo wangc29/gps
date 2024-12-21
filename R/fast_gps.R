@@ -1,29 +1,22 @@
 #' cor2cov function
-#'
-#' @param b.vec genetic effect estimates
-#' @return a vector
-#' @export
+#' @param ld.cor.mat a LD correlation matrix
+#' @param v.vec a vector of v statistic
+#' @return the approximated X'X from summary statistics and LD.
 cor2cov <- function(ld.cor.mat, v.vec) {
   if (length(v.vec)==1) {
     v.vec<-rep(v.vec,ncol(ld.cor.mat))
   }
-  if(dim(ld.cor.mat)[1]==1){
-    return(v.vec[1] %*% v.vec[1])
-  }
-  return(diag(v.vec) %*% ld.cor.mat %*% diag(v.vec))
+  diag(v.vec) %*% ld.cor.mat %*% diag(v.vec)
 }
 
-#' fit a locus
+#' fit a single LD block
 #'
-#' @param b.vec genetic effect estimates
 #' @return a vector
-#' @export
 gps_fit_single<-function(beta_est,se_est,ld_cor_mt,sample_size,anno_group,weight_prior,lambda,pi,phi,eta,init_vec=NULL,max_iter=1000,snp_id=NULL){
   ##initial joint effect est
   if (is.null(init_vec)) {
     init_vec<-beta_est
   }
-  #anno_group: 1, non-essential; 2 essential
   lambda_option<-c(lambda,lambda*phi)
   ##Now considering the mixing param of L1 and L2 penalty
   lambda_L1<-lambda_option*pi
@@ -51,11 +44,8 @@ gps_fit_single<-function(beta_est,se_est,ld_cor_mt,sample_size,anno_group,weight
   return(res_lasso_gps)
 }
 
-#' fit global
+#' fit across LD blocks
 #'
-#' @param b.vec genetic effect estimates
-#' @return a vector
-#' @export
 gps_fit_global<-function(beta_est,se_est,ld_cor_list,sample_size,anno_group,weight_prior,lambda,pi,phi,eta,init_vec=NULL,max_iter,snp_id){
   nBlock<-length(ld_cor_list)
   # Fit by blocks
@@ -93,14 +83,29 @@ gps_fit_global<-function(beta_est,se_est,ld_cor_list,sample_size,anno_group,weig
               isConverged_by_blk=isConverged_by_blk,snp_id_by_blk=snp_id_by_blk,
               beta_single_by_blk=beta_single_by_blk,se_single_by_blk=se_single_by_blk))
 }
+
+#' log sequence of hyperparams
+#'
 seq.log <- function(from, to, length.out) {
   return(exp(seq(log(from),log(to),length.out = length.out)))
 }
 
 #' fit grid
 #'
-#' @param b.vec genetic effect estimates
-#' @return a vector
+#' @param min_ratio the ratio between the minimum lambda (hyperparameter for shrinkage) and the maximum lambda
+#' @param nlambda number of lambda values that are evenly spaced beween min of lambda and max of lambda
+#' @param l1_ratio the contribution of l1 penalty for shrinkage.
+#' @param eta_vec a vector of eta values to be used. eta controls the contribution of the prior PRS model weights.
+#' @param beta_est a vector of marginal effect size estimates (assuming standardized genotype and phenotype)
+#' @param se_est a vector of standard error estimates of marginal effect size
+#' @param ld_cor_list a list of LD correlation matrix, each element is a LD correlation matrix of a LD block
+#' @param sample_size a scalar of sample size
+#' @param weight_prior a vector of the PRS weights of a correlated traits (e.g. PRS of the case-control phenotype).
+#' The order of the elements should be the same as beta_est and se_est. If not available, please fill with NAs.
+#' @param init_vec initial values used for coordinate descent algorithm.
+#' @param max_iter num of maximum iterations used in coordinate descent
+#' @return List of two elements: 1. a grid of joint effect size estimates. Each column corresponds to a specific combination of hyperparameters
+#' 2. a dataframe containing corresponding combinations of hyperparameters
 #' @export
 gps_grid<-function(min_ratio=0.01,nlambda=30,l1_ratio=c(0,0.25,0.5,0.75,1),eta_vec,
                    beta_est,se_est,ld_cor_list,sample_size,weight_prior,
@@ -136,11 +141,3 @@ gps_grid<-function(min_ratio=0.01,nlambda=30,l1_ratio=c(0,0.25,0.5,0.75,1),eta_v
   }
   return(list("beta_grid"=do.call(cbind,beta_grid),"param_grid"=param_grid))
 }
-
-
-
-
-
-
-
-

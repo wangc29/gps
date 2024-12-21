@@ -2,3 +2,4 @@
 */*.so
 */*/*.o
 */*/*.so
+.Rproj.user

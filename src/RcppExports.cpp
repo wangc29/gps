@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // fast_lasso_sum_ess_gps
 List fast_lasso_sum_ess_gps(const Eigen::VectorXd& uVec, const Eigen::MatrixXd& xTx, int n, const Eigen::VectorXi& group, const Eigen::VectorXd& lambda, const Eigen::VectorXd& alpha, const Eigen::VectorXd& eta, const Eigen::VectorXd& bccVec, const Eigen::VectorXd& initVec, const int maxIter);
-RcppExport SEXP _GPS_fast_lasso_sum_ess_gps(SEXP uVecSEXP, SEXP xTxSEXP, SEXP nSEXP, SEXP groupSEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP etaSEXP, SEXP bccVecSEXP, SEXP initVecSEXP, SEXP maxIterSEXP) {
+RcppExport SEXP _gps_fast_lasso_sum_ess_gps(SEXP uVecSEXP, SEXP xTxSEXP, SEXP nSEXP, SEXP groupSEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP etaSEXP, SEXP bccVecSEXP, SEXP initVecSEXP, SEXP maxIterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,11 +33,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_GPS_fast_lasso_sum_ess_gps", (DL_FUNC) &_GPS_fast_lasso_sum_ess_gps, 10},
+    {"_gps_fast_lasso_sum_ess_gps", (DL_FUNC) &_gps_fast_lasso_sum_ess_gps, 10},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_GPS(DllInfo *dll) {
+RcppExport void R_init_gps(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

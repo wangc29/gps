@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{fast_lasso_sum_ess_gps}
 \alias{fast_lasso_sum_ess_gps}
-\title{Rewrite lasso.sum.ess}
+\title{core function for fast coordinate descent of GPS loss function}
 \usage{
 fast_lasso_sum_ess_gps(
   uVec,
@@ -18,27 +18,29 @@ fast_lasso_sum_ess_gps(
 )
 }
 \arguments{
+\item{uVec}{u statistics (x'y)}
+
+\item{xTx}{x_transpose_x matrix calculated from reference panel}
+
 \item{n}{sample size;}
 
-\item{group}{1-based group indicator}
+\item{group}{1-based group indicator that indicates which alpha and lambda to use}
 
-\item{lambda}{l1 penalty parameter}
+\item{lambda}{l2 penalty parameter options, match unique group id}
 
-\item{alpha}{l2 penalty parameter}
+\item{alpha}{l1 penalty parameter options, match unique group id}
 
-\item{initVec}{initial value of beta}
+\item{eta}{l2 penalty parameter for deviation from prior (correlated) effect size estimates}
+
+\item{bccVec}{weight of PRS for a correlated trait to serve as a prior}
+
+\item{initVec}{initial value of beta (joint effect)}
 
 \item{maxIter}{maximum number of iterations}
-
-\item{bVec}{genetic effect estimates}
-
-\item{sVec}{standard error of genetic effect estimates;}
-
-\item{r2Mat}{residual errors;}
 }
 \value{
-a list where `beta` is the fitted regression coefficient vector, and `iteration` is the actual iteration.
+a list where \code{beta} is the fitted regression coefficient vector, and \code{iteration} is the actual iteration.
 }
 \description{
-Rewrite lasso.sum.ess
+core function for fast coordinate descent of GPS loss function
 }

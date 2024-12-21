@@ -1,17 +1,11 @@
-Package: GPS
-Type: Package
-Title: Genetic Prediction Score
+Package: gps
+Title: GPS is a penalized regression based method that can integrate large scale case-control study and electronic health record (EHR) based biobanks to construct polygenic risk score models for disease progression risk
 Version: 1.0
-Date: 2023-10-25
 Authors@R: c(person("Chen", "Wang", email = "cpw5443@gmail.com", role = c("aut", "cre")))
-Maintainer: Chen Wang <cpw5443@gmail.com>
-Description: Integrating EHR-based biobanks and GWAS summary statistics to predict the progression of autoimmune diseases from preclinical stages.
-License: GPL-3
+Description: What the package does (one paragraph).
+License: GPL (>= 3)
 Imports: Rcpp (>= 1.0.2), RcppEigen (>= 0.3.3.5.0)
 LinkingTo: Rcpp, RcppEigen
-RoxygenNote: 7.2.3
 Encoding: UTF-8
-Suggests: 
-    knitr,
-    rmarkdown
-VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
