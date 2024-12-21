@@ -1,8 +1,8 @@
 Package: gps
-Title: GPS is a penalized regression based method that can integrate large scale case-control study and electronic health record (EHR) based biobanks to construct polygenic risk score models for disease progression risk
+Title: GPS: Genetic Progression Score.
 Version: 1.0
 Authors@R: c(person("Chen", "Wang", email = "cpw5443@gmail.com", role = c("aut", "cre")))
-Description: What the package does (one paragraph).
+Description: GPS is a penalized regression-based method that integrates GWAS data of large scale case-control study and electronic health record (EHR) based biobanks to construct polygenic risk score models for predicting disease progression risk.
 License: GPL (>= 3)
 Imports: Rcpp (>= 1.0.2), RcppEigen (>= 0.3.3.5.0)
 LinkingTo: Rcpp, RcppEigen
